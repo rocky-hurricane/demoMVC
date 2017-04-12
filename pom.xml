@@ -13,9 +13,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- spring 版本号 -->
-    <spring.version>4.3.7.RELEASE</spring.version>
+    <spring.version>4.1.6.RELEASE</spring.version>
     <!-- hibernate 版本号-->
-    <hibernate.version>4.3.10.Final</hibernate.version>
+    <hibernate.version>4.1.12.Final</hibernate.version>
     <!-- log4j 日志文件管理包版本-->
     <slf4j.version></slf4j.version>
     <log4j.version></log4j.version>
@@ -88,15 +88,22 @@
       <version>${spring.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!-- Below declared dependencies are included for the servers who
+           may complain about servlet/jstl missing dependency -->
+    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.0.1</version>
-      <scope>provided</scope>
+      <!--<scope>provided</scope>-->
     </dependency>
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
-      <version>1.11.1.RELEASE</version>
+      <version>1.6.0.RELEASE</version>
       <exclusions>
         <exclusion>
           <artifactId>spring-tx</artifactId>
@@ -110,13 +117,20 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <version>2.2</version>
-      <scope>provided</scope>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.1</version>
+      <!--<scope>provided</scope>-->
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
 
 
-  <!-- 添加Hibernate依赖 -->
+
+    <!-- 添加Hibernate依赖 -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -127,6 +141,7 @@
       <artifactId>hibernate-entitymanager</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-ehcache</artifactId>
@@ -164,6 +179,7 @@
     </dependency>
 
   </dependencies>
+
   <build>
     <finalName>demo</finalName>
   </build>

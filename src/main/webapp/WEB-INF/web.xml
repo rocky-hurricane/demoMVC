@@ -38,6 +38,7 @@
   </filter-mapping>
 
   <!-- 配置 OpenEntityManagerInViewFilter. 可以解决懒加载异常的问题 -->
+  <!-- 会影响performance，当系统并发量不大时可以使用-->
   <filter>
     <filter-name>OpenEntityManagerInViewFilter</filter-name>
     <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
