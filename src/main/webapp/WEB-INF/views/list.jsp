@@ -11,10 +11,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%response.setHeader("Pragma","No-cache");
-    response.setHeader("Cache-Control","no-cache");
-    response.setDateHeader("Expires", 0);
-    response.flushBuffer();%>
 
 <html>
 <head>
@@ -57,7 +53,7 @@
                 </td>
                 <td>${emp.department.departmentName }</td>
 
-                <td><a href="">Edit</a></td>
+                <td><a href="${pageContext.request.contextPath}/emp/${emp.id}">Edit</a></td>
                 <td>
                     <a href="">Delete</a>
                 </td>

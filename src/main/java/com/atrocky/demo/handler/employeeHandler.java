@@ -6,10 +6,7 @@ import com.atrocky.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,8 +21,34 @@ public class employeeHandler {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping(value = "emp", method = RequestMethod.POST)
-    public  String save(Employee employee){
+    //this method will be execute before all target methods.
+    @ModelAttribute
+    public void getEmployee(@RequestParam(value = "id", required = false) Integer id, Map<String, Object> map){
+        if (id != null){
+            Employee employee = employeeService.get(id);
+            //if do not set null, when update the department. it will go wrong.
+            //cause hibernate does not allow to change the foreign key.
+            employee.setDepartment(null);
+            map.put("employee", employee);
+        }
+    }
+
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
+    public String update(Employee employee){
+        employeeService.save(employee);
+        return "redirect:/emps";
+    }
+
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+    public String input(@PathVariable("id") Integer id, Map<String,Object> map){
+        Employee employee = employeeService.get(id);
+        map.put("employee", employee); //the key value is equal to the <form:form modelAttribute=" ">
+        map.put("departments", departmentService.getAll());
+        return "input";
+    }
+
+    @RequestMapping(value = "/emp", method = RequestMethod.POST)
+    public String save(Employee employee){
         employeeService.save(employee);
         return "redirect:/emps";
     }

@@ -19,8 +19,15 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Transactional(readOnly = true)
+    public Employee get(Integer id){
+        return employeeRepository.findOne(id);
+    }
+
     public void save(Employee employee){
-        employee.setCreateTime(new Date());
+        if(employee.getId() == null){
+            employee.setCreateTime(new Date());
+        }
         employeeRepository.saveAndFlush(employee);
     }
 
