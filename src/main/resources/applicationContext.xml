@@ -45,12 +45,13 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-
+                <!-- config for second_level_cache-->
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
             </props>
         </property>
+        <!-- only for class configered by @Cacheable -->
         <property name="sharedCacheMode" value="ENABLE_SELECTIVE"></property>
     </bean>
 

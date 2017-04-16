@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Created by rocky on 17/4/5.
  */
-@Cacheable
+@Cacheable  //config for second_level_cache
 @Table(name="DEMO_DEPARTMENTS")  //auto create the table in database
 @Entity
 public class Department {
