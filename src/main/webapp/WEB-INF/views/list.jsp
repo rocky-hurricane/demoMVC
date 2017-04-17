@@ -11,13 +11,36 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
 <html>
 <head>
     <title>Hello Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".delete").click(function(){
+                var label = $(this).next(":hidden").val();
+                var flag = confirm("确定要删除" + label + "的信息吗?");
+                if(flag){
+                    var url = $(this).attr("href");
+
+                    $("#_form").attr("action", url);
+                    $("#_method").val("DELETE");
+                    $("#_form").submit();
+                }
+
+                return false;
+            });
+        })
+    </script>
+
 </head>
 <body>
 
+<form action="" method="POST" id="_form">
+    <input type="hidden" id="_method" name="_method"/>
+</form>
 
 <c:if test="${page == null || page.numberOfElements == 0 }">
     没有任何记录.
@@ -55,7 +78,8 @@
 
                 <td><a href="${pageContext.request.contextPath}/emp/${emp.id}">Edit</a></td>
                 <td>
-                    <a href="">Delete</a>
+                    <a href="${pageContext.request.contextPath }/emp/${emp.id}" class="delete">Delete</a>
+                    <input type="hidden" value="${emp.lastName }"/>
                 </td>
             </tr>
         </c:forEach>

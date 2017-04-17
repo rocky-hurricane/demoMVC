@@ -19,6 +19,11 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Transactional
+    public void delete(Integer id){
+        employeeRepository.delete(id);
+    }
+
     @Transactional(readOnly = true)
     public Employee get(Integer id){
         return employeeRepository.findOne(id);

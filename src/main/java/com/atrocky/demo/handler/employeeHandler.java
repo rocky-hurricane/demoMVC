@@ -33,6 +33,12 @@ public class employeeHandler {
         }
     }
 
+    @RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Integer id){
+        employeeService.delete(id);
+        return "redirect:/emps";
+    }
+
     @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
     public String update(Employee employee){
         employeeService.save(employee);
