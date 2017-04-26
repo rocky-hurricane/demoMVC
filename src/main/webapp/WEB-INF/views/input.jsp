@@ -59,7 +59,7 @@
     <form:form action="${url}" method="POST" modelAttribute="employee">
 
         <!-- when the hidden value needed to be displayed later(回显), use form:hidden(must relate to modelAttribute)
-            or use input hidden -->
+            in other cases, use input hidden -->
         <c:if test="${employee.id != null }">
             <input type="hidden" id="_oldLastName" value="${employee.lastName }"/>
             <form:hidden path="id"/>
@@ -67,10 +67,13 @@
         </c:if>
 
         LastName: <form:input path="lastName" id="lastName"/>
+                  <form:errors path="lastName"></form:errors>
         <br>
         Email: <form:input path="email"/>
+               <form:errors path="email"></form:errors>
         <br>
         Birth: <form:input path="birth"/>
+               <form:errors path="birth"></form:errors>
         <br>
         Departments:
         <form:select path="department.id" items="${departments}"

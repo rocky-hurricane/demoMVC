@@ -6,8 +6,10 @@ import com.atrocky.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -54,7 +56,13 @@ public class employeeHandler {
     }
 
     @RequestMapping(value = "/emp", method = RequestMethod.POST)
-    public String save(Employee employee){
+    //the position of employee need be close to result, no other params are allowed between the two params.
+    public String save(@Valid Employee employee, BindingResult result, Map<String, Object> map){
+        if (result.getErrorCount()>0){
+            // there can handle errors.
+            map.put("departments", departmentService.getAll());
+            return "input";
+        }
         employeeService.save(employee);
         return "redirect:/emps";
     }

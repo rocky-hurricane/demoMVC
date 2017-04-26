@@ -1,9 +1,12 @@
 package com.atrocky.demo.entity;
 
 import com.atrocky.demo.entity.Department;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -14,10 +17,15 @@ import java.util.Date;
 public class Employee {
 
     private Integer id;
+    @NotEmpty  //validator: @valid is needed where employee param appear.
     private String lastName;
+    @Email
     private String email;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")  //define the Date format
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    //define the Date format, a specified converter will be assigned to execute
+    //other converters, such as @NumberFormat
+    @Past
     private Date birth;
 
     private Date createTime;

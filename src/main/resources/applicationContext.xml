@@ -64,6 +64,8 @@
     <!-- 配置支持基于注解的事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+
+
     <!-- 配置 SpringData -->
     <jpa:repositories base-package="com.atrocky.demo"
                       entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
